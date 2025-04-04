@@ -10,7 +10,7 @@ const Title = () => {
 
 const styles = StyleSheet.create({
     title: {
-        frontSize: 32,
+        fontSize: 32,
         fontWeight: 'bold',
         textAlign: 'center',
         marginBottom: 24,
