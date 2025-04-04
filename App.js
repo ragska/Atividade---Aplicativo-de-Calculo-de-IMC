@@ -6,7 +6,7 @@ export default function App() {
 
   return (
 
-    <View style={styles.formContainer}>
+    <View style={styles.container}>
 
       <Title />
       <FormIMC />
