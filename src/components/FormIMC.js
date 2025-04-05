@@ -2,7 +2,7 @@ import { View, TextInput, Button, StyleSheet } from 'react-native';
 import Result from './Result';
 import Classification from './Classification';
 import PesoIdeal from './IdealWeight';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 const FormIMC = () => {
 
@@ -12,6 +12,8 @@ const FormIMC = () => {
     const [classificacao, setClassificacao] = useState(null);
     const [PesoMin, setPesoMin] = useState(null);
     const [PesoMax, setPesoMax] = useState(null);
+    const [corFundo, setCorFundo] = useState('#f0f0f0'); // cor padrão
+
 
 
     const calcularIMC = () => {
@@ -39,8 +41,20 @@ const FormIMC = () => {
         } else {
             setClassificacao('Obesidade grau 3 (obesidade mórbida)');
         } 
-
     }
+
+    useEffect(() => {
+        if (classificacao) {
+          if (classificacao === 'Peso Normal') {
+            setCorFundo('#d4edda'); // verde claro
+          } else if (classificacao === 'Sobrepeso') {
+            setCorFundo('#fff3cd'); // amarelo claro
+          } else {
+            setCorFundo('#f8d7da'); // vermelho claro
+          }
+        }
+      }, [classificacao]);
+      
 
     const calcularPesoIdeal = (altura) => {
 
@@ -51,7 +65,7 @@ const FormIMC = () => {
 
     return (
 
-        <View style={styles.formContainer}>
+        <View style={[styles.formContainer, { backgroundColor: corFundo }]}>
 
             <TextInput
                 style={styles.input}
@@ -78,6 +92,21 @@ const FormIMC = () => {
 
             {PesoMin && PesoMax && <PesoIdeal PesoMin={PesoMin} PesoMax={PesoMax}/>}
 
+
+            {imc && (
+                <View style={{marginTop:10}}>
+                    <Button title="Limpar" onPress={() => {
+                        setPeso('');
+                        setAltura('');
+                        setIMC(null);
+                        setClassificacao(null);
+                        setPesoMin(null);
+                        setPesoMax(null);
+                        setCorFundo('#f0f0f0');
+                    }} />
+                </View>
+            )}
+            
 
         </View>
 
