@@ -1,6 +1,7 @@
 import { View, TextInput, Button, StyleSheet } from 'react-native';
 import Result from './Result';
 import Classification from './Classification';
+import PesoIdeal from './IdealWeight';
 import { useState } from 'react';
 
 const FormIMC = () => {
@@ -9,6 +10,9 @@ const FormIMC = () => {
     const [altura, setAltura] = useState('');
     const [imc, setIMC] = useState(null);
     const [classificacao, setClassificacao] = useState(null);
+    const [PesoMin, setPesoMin] = useState(null);
+    const [PesoMax, setPesoMax] = useState(null);
+
 
     const calcularIMC = () => {
         if (peso && altura) {
@@ -16,6 +20,7 @@ const FormIMC = () => {
             const imcCalculado = (parseFloat(peso) / (alturaMetros * alturaMetros)).toFixed(2);
             setIMC(imcCalculado);
             definirClassificacao(imcCalculado);
+            calcularPesoIdeal(alturaMetros);
         }
     };
 
@@ -36,6 +41,13 @@ const FormIMC = () => {
         } 
 
     }
+
+    const calcularPesoIdeal = (altura) => {
+
+        setPesoMin((18.5 * (altura * altura)).toFixed(2));
+        setPesoMax((24.9 * (altura * altura)).toFixed(2));
+
+    };
 
     return (
 
@@ -63,6 +75,8 @@ const FormIMC = () => {
             {imc && <Result imc={imc}/>}
 
             {classificacao && <Classification classificacao={classificacao}/>}
+
+            {PesoMin && PesoMax && <PesoIdeal PesoMin={PesoMin} PesoMax={PesoMax}/>}
 
 
         </View>
