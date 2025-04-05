@@ -40,3 +40,7 @@ Vá até o repositório desejado, clique no botão verde "Code" e copie o link q
 No terminal do Git Bash, digite: 
 
     git clone https://github.com/ragska/Atividade---Aplicativo-de-Calculo-de-IMC.git
+    
+Para baixar as dependências, digite:
+
+    npm install
