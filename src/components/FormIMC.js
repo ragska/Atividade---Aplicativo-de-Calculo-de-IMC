@@ -7,7 +7,7 @@ import { useState, useEffect } from 'react';
 // Componente principal do formulário de cálculo de IMC
 const FormIMC = () => {
 
-    // Estados para armazenar os valores digitados pelo usuário
+    // Estados para armazenar os valores digitados pelo usuário e calculados
     const [peso, setPeso] = useState(''); 
     const [altura, setAltura] = useState('');  
     const [imc, setIMC] = useState(null);  
